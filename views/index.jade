@@ -1,0 +1,53 @@
+doctype html
+html
+    head
+        title To-do App
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/style.css")
+    body
+        div.container
+            form(class='', id='form', action='/addTask', method='POST') 
+                h1.text-center To-do Lists
+                div.input-header
+                    div.form-inline
+                        input(
+                            type='text'
+                            name='newtask'
+                            placeholder='Add new task'
+                            class='form-control'
+                            )
+                        button.btn.btn-primary Add task
+                div.row
+                    div.col-lg-6
+                        h2 Things Todo!
+                        ul.list-group.yellow
+                            each item in tasks
+                                li.list-group-item
+                                    input(
+                                    type='checkbox'
+                                    name='check'
+                                    value=item.id
+                                    id=item.id
+                                    onChange='changeHandler()'
+                                    )
+                                    label(for=item.id)=item.task
+                                
+                        button(formaction='/removeTask' id='remove' type='submit' class='btn btn-secondary' style='visibility: hidden') Remove Task
+                    div.col-lg-6
+                        h2 Completed List
+                        ul.list-group.green
+                            each item in completed
+                                li.list-group-item
+                                    input(
+                                    type='checkbox'
+                                    name='completed'
+                                    value=item.id
+                                    id=item.id
+                                    onChange='updateHandler()'
+                                    )
+                                    label(for=item.id, class='completed')=item.task
+            
+        footer.text-center
+            &copy; 2019. SlingIt.
+        script(src="/script.js")
+                
